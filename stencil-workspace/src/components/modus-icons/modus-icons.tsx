@@ -1,12 +1,15 @@
 // eslint-disable-next-line
-import { Component, h, Prop, Event, EventEmitter } from '@stencil/core';
+import { Component, h, Prop, Event, Element, EventEmitter } from '@stencil/core';
 import { IconMap } from '../icons/IconMap';
+import svg from '@trimble-oss/modus-icons/dist/modus-solid/sprites/modus-icons.svg';
 
 @Component({
   tag: 'modus-icon',
+  styleUrl: 'modus-icon.scss',
   shadow: true,
 })
 export class ModusIcon {
+  @Element() el: HTMLElement;
   /** The name of the icon */
   @Prop() name: string | null;
 
@@ -25,7 +28,18 @@ export class ModusIcon {
     }
     this.iconClick.emit(event);
   }
+
+  componentWillLoad(): void {
+    this.el.style.setProperty('--modus-icon', `var(--modus-${this.name})`);
+  }
+
   render(): unknown {
-    return <IconMap icon={this.name} onClick={this.onClick} size={this.size} color={this.color} />;
+    return (
+      <div class="modus-icons">
+        <svg style={{ width: this.size, height: this.size, color: this.color }} fill={this.color ?? 'currentColor'}>
+          <use href={`${svg}#${this.name}`}></use>
+        </svg>
+      </div>
+    );
   }
 }

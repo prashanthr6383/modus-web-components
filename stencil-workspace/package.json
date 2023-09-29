@@ -40,7 +40,8 @@
   },
   "dependencies": {
     "@stencil/core": "^3.3.0",
-    "@tanstack/table-core": "^8.8.5"
+    "@tanstack/table-core": "^8.8.5",
+    "@trimble-oss/modus-icons": "^1.5.1"
   },
   "devDependencies": {
     "@stencil/angular-output-target": "^0.7.1",
