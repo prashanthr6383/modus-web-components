@@ -9,6 +9,7 @@ import { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 import { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 import { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 import { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+import { ModusIconType } from "./components/modus-icons/modus-icon.models";
 import { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 import { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 import { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -23,6 +24,7 @@ export { ModusAutocompleteOption } from "./components/modus-autocomplete/modus-a
 export { Crumb } from "./components/modus-breadcrumb/modus-breadcrumb";
 export { ModusDataTableCellLink, ModusDataTableDisplayOptions, ModusDataTableRowAction, ModusDataTableRowActionClickEvent, ModusDataTableSelectionOptions, ModusDataTableSortEvent, ModusDataTableSortOptions, TCell, TColumn, TRow } from "./components/modus-data-table/modus-data-table.models";
 export { ModusDateInputEventDetails, ModusDateInputType } from "./components/modus-date-input/utils/modus-date-input.models";
+export { ModusIconType } from "./components/modus-icons/modus-icon.models";
 export { ModusNavbarApp } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
 export { ModusNavbarButton, ModusNavbarLogoOptions, ModusNavbarProfileMenuLink, ModusNavbarTooltip, ModusProfileMenuOptions } from "./components/modus-navbar/modus-navbar.models";
 export { ModusNavbarApp as ModusNavbarApp1 } from "./components/modus-navbar/apps-menu/modus-navbar-apps-menu";
@@ -536,6 +538,10 @@ export namespace Components {
           * (optional) The size of the Icon
          */
         "size"?: string;
+        /**
+          * (optional) The size of the Icon
+         */
+        "type"?: ModusIconType;
     }
     interface ModusList {
     }
@@ -2425,6 +2431,10 @@ declare namespace LocalJSX {
           * (optional) The size of the Icon
          */
         "size"?: string;
+        /**
+          * (optional) The size of the Icon
+         */
+        "type"?: ModusIconType;
     }
     interface ModusList {
     }

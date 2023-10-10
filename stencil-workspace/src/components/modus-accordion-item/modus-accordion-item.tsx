@@ -126,7 +126,7 @@ export class ModusAccordionItem {
             <div
               class={`chevron-container ${this.expanded ? 'reverse' : ''} `}
               ref={(el) => (this.chevronContainerRef = el)}>
-              <IconChevronDownThick size="24"></IconChevronDownThick>
+              <modus-icon size="24" name="expand-more"></modus-icon>
             </div>
           }
         </div>
