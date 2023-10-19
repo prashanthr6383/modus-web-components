@@ -92,10 +92,12 @@ export class ModusAutocomplete {
   @Event() valueChange: EventEmitter<string>;
 
   @State() containsSlottedElements = false;
-  @State() hasFocus = false;
+  @State() showOptions = false;
   @State() visibleOptions: ModusAutocompleteOption[] = [];
   @State() customOptions: Array<any> = [];
   @State() visibleCustomOptions: Array<any> = [];
+
+  textInputRef: HTMLModusTextInputElement;
 
   componentWillLoad(): void {
     this.convertOptions();
@@ -114,7 +116,7 @@ export class ModusAutocomplete {
   @Listen('click', { target: 'document' })
   outsideElementClickHandler(event: MouseEvent): void {
     if (this.el !== event.target || !this.el.contains(event.target as Node)) {
-      this.hasFocus = false;
+      this.showOptions = false;
     }
   }
 
@@ -136,24 +138,24 @@ export class ModusAutocomplete {
 
   displayNoResults = () =>
     this.showNoResultsFoundMessage &&
-    this.hasFocus &&
+    this.showOptions &&
     !this.visibleOptions?.length &&
     !this.visibleCustomOptions?.length &&
     this.value?.length > 0;
 
-  displayOptions = () => this.hasFocus && this.value?.length > 0 && !this.disabled;
+  displayOptions = () => this.showOptions && this.value?.length > 0 && !this.disabled;
 
   handleCustomOptionClick = (option: any) => {
     const optionValue = option.getAttribute(DATA_SEARCH_VALUE);
     const optionId = option.getAttribute(DATA_ID);
     this.handleSearchChange(optionValue);
-    this.hasFocus = false;
+    this.showOptions = false;
     this.optionSelected.emit(optionId);
   };
 
   handleOptionClick = (option: ModusAutocompleteOption) => {
     this.handleSearchChange(option.value);
-    this.hasFocus = false;
+    this.showOptions = false;
     this.optionSelected.emit(option.id);
   };
 
@@ -163,10 +165,13 @@ export class ModusAutocomplete {
 
     this.value = search;
     this.valueChange.emit(search);
+    this.textInputRef.focusInput();
   };
 
   handleTextInputValueChange = (event: CustomEvent<string>) => {
     // Cancel the modus-text-input's value change event or else it will bubble to consumer.
+
+    this.showOptions = event.detail?.length > 0;
     event.stopPropagation();
     this.handleSearchChange(event.detail);
   };
@@ -210,8 +215,9 @@ export class ModusAutocomplete {
 
   TextInput = () => (
     <modus-text-input
+      ref={(el) => (this.textInputRef = el)}
       clearable={this.clearable}
-      errorText={this.hasFocus ? '' : this.errorText}
+      errorText={this.showOptions ? '' : this.errorText}
       includeSearchIcon={this.includeSearchIcon}
       label={this.label}
       onValueChange={(searchEvent: CustomEvent<string>) => this.handleTextInputValueChange(searchEvent)}
@@ -231,8 +237,7 @@ export class ModusAutocomplete {
         aria-label={this.ariaLabel}
         aria-readonly={this.readOnly}
         aria-required={this.required}
-        class={classes}
-        onFocusin={() => (this.hasFocus = true)}>
+        class={classes}>
         {this.TextInput()}
         <div
           class="options-container"

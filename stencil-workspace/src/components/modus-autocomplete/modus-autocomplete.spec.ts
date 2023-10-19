@@ -115,7 +115,7 @@ describe('modus-autocomplete', () => {
   it('should display no results when there are no regular or custom results', async () => {
     const modusAutocomplete = new ModusAutocomplete();
     modusAutocomplete.showNoResultsFoundMessage = true;
-    modusAutocomplete.hasFocus = true;
+    modusAutocomplete.showOptions = true;
     modusAutocomplete.visibleOptions = [];
     modusAutocomplete.visibleCustomOptions = [];
     modusAutocomplete.value = 'search value';
@@ -126,7 +126,7 @@ describe('modus-autocomplete', () => {
   it('should display options', async () => {
     const modusAutocomplete = new ModusAutocomplete();
     modusAutocomplete.disabled = false;
-    modusAutocomplete.hasFocus = true;
+    modusAutocomplete.showOptions = true;
     modusAutocomplete.value = 'search value';
 
     expect(modusAutocomplete.displayOptions()).toEqual(true);
